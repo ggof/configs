@@ -176,7 +176,7 @@ screens = [
                 ),
                 widget.Volume(
                     background=C4,
-                    fmt="Volume: {}",
+                    fmt=" {}",
                 ),
                 widget.Clock(format='%Y-%m-%d %a %I:%M %p', background=CD),
                 widget.QuickExit(background=C1),
