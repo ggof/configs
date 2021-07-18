@@ -29,30 +29,29 @@ from typing import List  # noqa: F401
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
 import os
 import subprocess
 
-C0 = "#2D2D2D"
-C1 = "#F2777A"
-C2 = "#99CC99"
-C3 = "#FFCC66"
-C4 = "#6699CC"
-C5 = "#CC99CC"
-C6 = "#66CCCC"
-C7 = "#D3D0C8"
-C8 = "#747369"
-C9 = "#F2777A"
-CA = "#99CC99"
-CB = "#FFCC67"
-CC = "#6699CC"
-CD = "#CC99CC"
-CE = "#66CCCC"
-CF = "#F2F0EC"
+C0 = "#272822"
+C1 = "#f92672"
+C2 = "#a6e22e"
+C3 = "#f4bf75"
+C4 = "#66d9ef"
+C5 = "#ae81ff"
+C6 = "#a1efe4"
+C7 = "#f8f8f2"
+C8 = "#75715e"
+C9 = "#f92672"
+CA = "#a6e22e"
+CB = "#f4bf75"
+CC = "#66d9ef"
+CD = "#ae81ff"
+CE = "#a1efe4"
+CF = "#f9f8f5"
 
 mod = "mod4"
 alt = "mod1"
-terminal = guess_terminal()
+terminal = "kitty"
 follow_mouse_focus = False
 
 
@@ -143,8 +142,8 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='Cascadia Code',
-    fontsize=20,
+    font='VictorMono Nerd Font Mono Medium',
+    fontsize=22,
     foreground=C0,
     padding=8,
 )
@@ -159,7 +158,8 @@ screens = [
                     background=C4,
                 ),
                 widget.GroupBox(
-                    highlight_method="block",
+                    highlight_method="line",
+                    this_current_screen_border=C6,
                     inactive=CF,
                 ),
                 widget.WindowName(
@@ -167,18 +167,19 @@ screens = [
                 ),
                 widget.Systray(background=C2, margin=8),
                 widget.KeyboardLayout(
+                    fmt=" {}",
                     configured_keyboards=["us", "ca"],
                     background=C3,
                 ),
                 widget.CPU(
                     background=CA,
-                    format="CPU: {load_percent}%"
+                    format=" {load_percent}%"
                 ),
                 widget.Volume(
                     background=C4,
                     fmt=" {}",
                 ),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p', background=CD),
+                widget.Clock(format=' %Y-%m-%d %I:%M %p', background=CD),
                 widget.QuickExit(background=C1),
             ],
             40,
@@ -198,8 +199,6 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
-main = None  # WARNING: this is deprecated and will be removed soon
-follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
@@ -212,8 +211,10 @@ floating_layout = layout.Floating(float_rules=[
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
 ])
+
 auto_fullscreen = True
 focus_on_window_activation = "smart"
+follow_mouse_focus = False
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

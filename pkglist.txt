@@ -1,4 +1,3 @@
-alacritty
 appimagelauncher
 asciidoc
 atril
@@ -52,6 +51,7 @@ gvfs
 gzip
 jdk8-openjdk
 jetbrains-toolbox
+kitty
 lib32-gnutls
 lib32-libpulse
 lib32-vkd3d
