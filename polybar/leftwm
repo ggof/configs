@@ -82,7 +82,7 @@ foreground = ${colors.foreground}
 line-size = 4
 line-color = #f00
 
-; wm-restack = i3
+wm-restack = i3
 override-redirect = true
 
 ; Enable support for inter-process messaging

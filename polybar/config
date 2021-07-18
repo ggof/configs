@@ -88,7 +88,7 @@ module-margin-right = 1
 
 ;https://github.com/jaagr/polybar/wiki/Fonts
 font-0 = "Noto Sans:size=14;0"
-font-1 = "FontAwesome:size=14;0"
+font-1 = "Font Awesome 5 Free Regular:size=14;0"
 font-2 = "Noto Sans:size=14;0"
 font-3 = "Noto Sans Mono:size=14;0"
 
