@@ -3,6 +3,7 @@ asciidoc
 atril
 autoconf
 automake
+awesome
 base
 bear
 binutils
