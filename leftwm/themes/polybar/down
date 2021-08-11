@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+
+killall -q polybar
+killall -q picom
+
+killall -q pipewire
+killall -q pipewire-pulse
+killall -q pipewire-media-session

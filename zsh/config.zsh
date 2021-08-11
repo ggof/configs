@@ -102,6 +102,8 @@ source $ZSH/oh-my-zsh.sh
 # source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+alias lr=luarocks
+
 # variables that need exporting
 
 export ANDROIDPATH=$HOME/Android/Sdk
@@ -114,10 +116,13 @@ FLUTTERBIN=$HOME/.local/share/flutter/bin
 GOBIN=$GOPATH/bin
 POETRYBIN=$HOME/.poetry/bin
 LOCALBIN=$HOME/.local/bin
+OPENRESTYBIN=/opt/openresty/bin
+NIMBIN=$HOME/.nimble/bin
 
-export PATH=$PATH:$ANDROIDBIN:$CARGOBIN:$DARTBIN:$FLUTTERBIN:$GOBIN:$POETRYBIN:$LOCALBIN:$ANDROIDPATH:$GOPATH
+export PATH=$PATH:$ANDROIDBIN:$CARGOBIN:$DARTBIN:$FLUTTERBIN:$GOBIN:$POETRYBIN:$LOCALBIN:$ANDROIDPATH:$GOPATH:$OPENRESTYBIN:$NIMBIN
 
 export JAVA_HOME=/usr/lib/jvm/java-15-openjdk
+export EDITOR=nvim
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

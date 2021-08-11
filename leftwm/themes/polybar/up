@@ -1,0 +1,21 @@
+#! /usr/bin/env bash
+
+THEME_PATH=~/.config/leftwm/themes/polybar
+
+picom --conf $THEME_PATH/picom.conf &
+nm-applet &
+
+setxkbmap -layout "us,ca" -option "grp:alt_shift_toggle"
+
+xrandr --rate 100
+nitrogen --set-zoom-fill $THEME_PATH/background.jpg
+
+polybar --reload mainbar -c $THEME_PATH/bar.conf &
+
+pipewire &
+pipewire-pulse &
+pipewire-media-session &
+
+sleep 1
+
+pactl set-sink-volume @DEFAULT_SINK@ 35%
