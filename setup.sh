@@ -1,10 +1,12 @@
 #! /usr/bin/env sh
 
-ln -s alacritty $HOME/.config/alacritty
-ln -s nvim $HOME/.config/nvim
-ln -s spectrwm $HOME/.config/spectrwm
-ln -s qtile $HOME/.config/qtile
-ln -s picom.conf $HOME/.config/picom.conf
-ln -s polybar $HOME/.config/polybar
-ln -s zsh/config.zsh $HOME/.zshrc
-sudo pacman -Syu --needed - < pkglist.txt
+PWD=$(pwd)
+
+ln -s $PWD/awesome $HOME/.config
+ln -s $PWD/kitty $HOME/.config
+ln -s $PWD/nvim $HOME/.config
+ln -s $PWD/qtile $HOME/.config
+ln -s $PWD/picom.conf $HOME/.config/picom.conf
+ln -s $PWD/polybar $HOME/.config
+ln -s $PWD/fish $HOME/.config
+# sudo pacman -Syu --needed - < pkglist.txt
