@@ -25,7 +25,7 @@ end
 
 -- To get builtin LSP running, do something like:
 -- NOTE: This replaces the calls where you would have before done `require('nvim_lsp').sumneko_lua.setup()`
-local servers = { 'pyright', 'rls', 'tsserver', 'gopls', 'hls', 'nimls', 'fsautocomplete' }
+local servers = { 'pyright', 'rls', 'tsserver', 'gopls', 'hls', 'nimls', 'fsautocomplete', 'kotlin_language_server' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,

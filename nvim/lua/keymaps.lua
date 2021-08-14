@@ -5,6 +5,7 @@ set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 -- Mappings
 local opts = { noremap=true, silent=true }
-set_keymap('n', '<C-p>', ':Telescope fd<CR>', opts)
+set_keymap('n', '<C-p>', ':Files<CR>', opts)
+set_keymap('n', '<C-b>', ':Buffers<CR>', opts)
 set_keymap('n', '<TAB>', ':tabnext<CR>', opts)
 set_keymap('n', '<S-TAB>', ':tabprevious<CR>', opts)

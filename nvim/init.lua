@@ -20,9 +20,7 @@ require "paq" {
     "nvim-treesitter/nvim-treesitter";
 
     "nvim-lua/popup.nvim";
-    "nvim-lua/plenary.nvim";
     "nvim-lua/completion-nvim";
-    "nvim-telescope/telescope.nvim";
     {"lervag/vimtex", opt=true};      -- Use braces when passing options
 
     "norcalli/nvim-colorizer.lua";
@@ -31,6 +29,8 @@ require "paq" {
 
     "ionide/ionide-vim";
 
+    "junegunn/fzf";
+    "junegunn/fzf.vim";
 }
 
 -- PLUGINS
