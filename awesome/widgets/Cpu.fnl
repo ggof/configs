@@ -4,10 +4,10 @@
 (local helpers (require "helpers"))
 (local cpu_text (wibox.widget.textbox ""))
 
-(var total_prev 0)
-(var idle_prev 0)
 
 (fn do_watch [widget stdout stderr reason code]
+  (var total_prev 0)
+  (var idle_prev 0)
   (let [
         (user nice system idle iowait irq softirq steal) 
         (stdout:match "(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s")

@@ -5,6 +5,7 @@ local beautiful = require("beautiful")
 
 local volumebar_widget = require("widgets.VolumeBar")
 local cpu_widget = require("widgets.Cpu")
+local ram_widget = require("widgets.RAM")
 
 local helpers = require("helpers")
 
@@ -69,6 +70,9 @@ awful.screen.connect_for_each_screen(
                 layout = wibox.layout.fixed.horizontal,
                 volumebar_widget.prefix,
                 volumebar_widget,
+                text_separator,
+                ram_widget.prefix,
+                ram_widget,
                 text_separator,
                 cpu_widget.prefix,
                 cpu_widget,
