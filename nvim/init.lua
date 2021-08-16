@@ -28,6 +28,7 @@ require "paq" {
     "alvarosevilla95/luatab.nvim";
 
     "ionide/ionide-vim";
+    "leafo/moonscript-vim";
 
     "junegunn/fzf";
     "junegunn/fzf.vim";

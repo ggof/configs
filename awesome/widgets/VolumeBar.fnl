@@ -33,27 +33,3 @@
     (set volume_widget.prefix prefix)
 
     volume_widget))
-
-
-; local request_command = 'amixer -D pulse sget Master'
-
-; local volume_widget = wibox.widget.textbox()
-
-; volume_widget:connect_signal("button::press", function(_,_,_,button)
-;     if (button == 4)     then awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%", false)
-;     elseif (button == 5) then awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%", false)
-;     elseif (button == 1) then awful.spawn("pactil set-sink-mute @DEFAULT_SINK@ toggle", false)
-;     end
-
-;     spawn.easy_async(request_command, function(stdout, stderr, exitreason, exitcode)
-;         update_graphic(volume_widget, stdout, stderr, exitreason, exitcode)
-;     end)
-; end)
-
-; watch(request_command, 1, update_graphic, volume_widget)
-
-; local volume_prefix = wibox.widget.textbox(" ")
-; volume_prefix.markup = helpers.colorize_text(volume_prefix.text, beautiful.prefix_fg)
-; volume_widget.prefix = volume_prefix
-
-; return volume_widget

@@ -8,6 +8,9 @@
 --  ▒▒▒▒▒      ▒▒▒▒▒▒  ▒▒ ▒▒▒▒▒   ▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒
 --
 --------------------------------------------------------------------------------
+local fennel = require("./fennel")
+fennel.path = fennel.path .. ";.config/awesome/?.fnl"
+table.insert(package.loaders or package.searchers, fennel.searcher)
 
 local theme_collection = {
     "eighties", -- 1 --
@@ -18,10 +21,6 @@ local theme_collection = {
 
 -- Change this number to use a different theme
 local theme_name = theme_collection[1]
-
-local fennel = require("./fennel")
-fennel.path = fennel.path .. ";.config/awesome/?.fnl"
-table.insert(package.loaders or package.searchers, fennel.searcher)
 
 --------------------------------------------------------------------------------
 
@@ -376,12 +375,11 @@ client.connect_signal(
 )
 --
 -- Enable sloppy focus, so that focus follows mouse.
-
-client.connect_signal("mouse::enter", function(c)
+--[[ client.connect_signal("mouse::enter", function(c)
     if awful.client.focus.filter(c) then
         client.focus = c
     end
-end)
+end) ]]
 
 -- Apply shapes
 -- beautiful.notification_shape = helpers.infobubble(beautiful.notification_border_radius)

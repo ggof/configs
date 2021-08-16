@@ -79,7 +79,7 @@ client.connect_signal("request::titlebars", function(c)
         titlebar_item_layout = wibox.layout.fixed.horizontal
         titlebar_layout = wibox.layout.align.horizontal
     end
-        
+
     -- Create 4 dummy titlebars around the window to imitate borders
     if beautiful.titlebars_imitate_borders then
         helpers.create_titlebar(c, buttons, "top", beautiful.titlebar_size)
@@ -102,7 +102,6 @@ client.connect_signal("request::titlebars", function(c)
 
                 buttons = buttons,
                 --awful.titlebar.widget.iconwidget(c),
-                
                 layout  = titlebar_item_layout
             },
             { -- Middle

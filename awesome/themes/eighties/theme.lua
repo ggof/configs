@@ -15,22 +15,22 @@ local theme_name = "eighties"
 local theme = dofile(themes_path.."default/theme.lua")
 --local theme = {}
 
-local terminal_color_0 =  "#2d2d2d"
-local terminal_color_1 =  "#f2777a"
-local terminal_color_2 =  "#99cc99"
-local terminal_color_3 =  "#ffcc66"
-local terminal_color_4 =  "#6699cc"
-local terminal_color_5 =  "#cc99cc"
-local terminal_color_6 =  "#66cccc"
-local terminal_color_7 =  "#d3d0c8"
-local terminal_color_8 =  "#747369"
-local terminal_color_9 =  "#f2777a"
-local terminal_color_10 = "#99cc99"
-local terminal_color_11 = "#ffcc66"
-local terminal_color_12 = "#6699cc"
-local terminal_color_13 = "#cc99cc"
-local terminal_color_14 = "#66cccc"
-local terminal_color_15 = "#f2f0ec"
+local terminal_color_0 =  "#4c4c4c"
+local terminal_color_1 =  "#ac8a8c"
+local terminal_color_2 =  "#8aac8b"
+local terminal_color_3 =  "#aca98a"
+local terminal_color_4 =  "#8f8aac"
+local terminal_color_5 =  "#ac8aac"
+local terminal_color_6 =  "#8aacab"
+local terminal_color_7 =  "#f0f0f0"
+local terminal_color_8 =  "#262626"
+local terminal_color_9 =  "#c49ea0"
+local terminal_color_10 = "#9ec49f"
+local terminal_color_11 = "#c4c19e"
+local terminal_color_12 = "#a39ec4"
+local terminal_color_13 = "#c49ec4"
+local terminal_color_14 = "#9ec3c4"
+local terminal_color_15 = "#e7e7e7"
 
 local awful = require("awful")
 -- Used to make it easier to align the panels in specific monitor positions
@@ -44,12 +44,12 @@ local focused_color = terminal_color_14
 local unfocused_color = terminal_color_7
 local urgent_color = terminal_color_11
 
-theme.bg_dark       = terminal_color_0
-theme.bg_normal     = terminal_color_0
-theme.bg_focus      = terminal_color_0
-theme.bg_urgent     = terminal_color_0
-theme.bg_minimize   = terminal_color_0
-theme.bg_systray    = terminal_color_0
+theme.bg_dark       = terminal_color_8
+theme.bg_normal     = terminal_color_8
+theme.bg_focus      = terminal_color_8
+theme.bg_urgent     = terminal_color_8
+theme.bg_minimize   = terminal_color_8
+theme.bg_systray    = terminal_color_8
 
 theme.fg_normal     = terminal_color_7
 theme.fg_focus      = focused_color
@@ -66,9 +66,9 @@ theme.useless_gap   = dpi(5)
 theme.screen_margin = dpi(5)
 
 -- Borders
-theme.border_width  = dpi(1)
-theme.border_normal = terminal_color_0
-theme.border_focus  = terminal_color_0
+theme.border_width  = dpi(4)
+theme.border_normal = terminal_color_7
+theme.border_focus  = terminal_color_2
 -- Rounded corners
 theme.border_radius = dpi(6)
 
@@ -137,9 +137,9 @@ theme.wibar_position = "top"
 theme.wibar_detached = true
 theme.wibar_height = dpi(40)
 theme.wibar_fg = terminal_color_15
-theme.wibar_bg = terminal_color_0
+theme.wibar_bg = terminal_color_8
 -- theme.wibar_opacity = 0.8
-theme.wibar_border_color = terminal_color_0
+theme.wibar_border_color = terminal_color_8
 theme.wibar_border_width = 0
 theme.wibar_border_radius = theme.border_radius
 --theme.wibar_width = screen_width - theme.screen_margin * 4 -theme.wibar_border_width * 2

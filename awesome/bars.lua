@@ -15,7 +15,7 @@ local tag_list = require("widgets.TagList")
 local text_clock = require("widgets.TextClock")
 
 -- Create padding
-pad = wibox.widget.textbox(" ")
+local pad = wibox.widget.textbox(" ")
 
 -- }}}
 

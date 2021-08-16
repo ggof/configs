@@ -218,9 +218,8 @@ end
 
 -- Mouse buttons on the client (whole window, not just titlebar)
 keys.clientbuttons = gears.table.join(
-    awful.button({ }, 1, function ()
-        local c = awful.mouse.current_client
-        if c ~= nil then
+    awful.button({ }, 1, function (c)
+        if c then
             client.focus = c
         end
     end),
