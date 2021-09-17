@@ -17,16 +17,28 @@ set -gx EDITOR nvim
 
 ## COLORS ##
 # Dracula Color Palette
-set -u foreground f0f0f0
-set -u selection 262626
-set -u comment c6a679
-set -u red ac8a8c
-set -u orange 9ec49f
+# set -u foreground f0f0f0
+# set -u selection 262626
+# set -u comment c6a679
+# set -u red ac8a8c
+# set -u orange 9ec49f
+# set -u yellow aca98a
+# set -u green 8aac8b
+# set -u magenta ac8aac
+# set -u cyan 8aacab
+# set -u blue c49ea0
+
+# Ayu Dark Color Palette
+set -u foreground bfbab0
+set -u selection ffb454
+set -u comment d9dbdd
+set -u red f51818
+set -u green c2d94c
+set -u orange f29718
 set -u yellow aca98a
-set -u green 8aac8b
-set -u purple ac8aac
-set -u cyan 8aacab
-set -u pink c49ea0
+set -u blue 59c2ff
+set -u magenta b77ee0
+set -u cyan 5ccfe6
 
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground
@@ -35,13 +47,13 @@ set -g fish_color_quote $yellow
 set -g fish_color_redirection $foreground
 set -g fish_color_end $orange
 set -g fish_color_error $red
-set -g fish_color_param $purple
+set -g fish_color_param $magenta
 set -g fish_color_comment $comment
 set -g fish_color_match --background=$selection
 set -g fish_color_selection --background=$selection
 set -g fish_color_search_match --background=$selection
 set -g fish_color_operator $green
-set -g fish_color_escape $pink
+set -g fish_color_escape $blue
 set -g fish_color_autosuggestion $comment
 
 # Completion Pager Colors

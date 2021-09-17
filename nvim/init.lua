@@ -4,7 +4,8 @@ local cmd = vim.cmd
 
 vim.g.mapleader = ' '
 vim.o.termguicolors = true
-cmd 'colorscheme mountain'
+cmd 'colorscheme ayu'
+vim.g.ayucolor = "dark"
 
 require "paq" {
     "savq/paq-nvim";                  -- Let Paq manage itself
@@ -25,7 +26,9 @@ require "paq" {
 
     "norcalli/nvim-colorizer.lua";
     "glepnir/galaxyline.nvim";
-    "alvarosevilla95/luatab.nvim";
+    -- "alvarosevilla95/luatab.nvim";
+    'akinsho/bufferline.nvim';
+    "ayu-theme/ayu-vim";
 
     "ionide/ionide-vim";
     "leafo/moonscript-vim";
@@ -51,3 +54,4 @@ require('config')
 require('lsp')
 require('keymaps')
 require('eviline')
+require("bufferline").setup{}

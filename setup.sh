@@ -11,6 +11,6 @@ ln -s $PWD/polybar $HOME/.config
 ln -s $PWD/fish $HOME/.config
 
 # change shell for fish
-chsh -s /usr/bin/fish
+# chsh -s /usr/bin/fish
 
 # sudo pacman -Syu --needed - < pkglist.txt

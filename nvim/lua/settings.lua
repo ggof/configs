@@ -6,7 +6,7 @@ local indent = 4
 cmd 'syntax enable'
 cmd 'filetype plugin indent on'
 
-utils.opt('o', 'tabline', '%!v:lua.require\'luatab\'.tabline()')
+-- utils.opt('o', 'tabline', '%!v:lua.require\'luatab\'.tabline()')
 utils.opt('o', 'completeopt', "menuone,noselect")
 utils.opt('b', 'expandtab', true)
 utils.opt('b', 'shiftwidth', indent)
