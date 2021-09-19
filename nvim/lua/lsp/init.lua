@@ -69,3 +69,11 @@ nvim_lsp.sumneko_lua.setup {
   },
 }
 
+nvim_lsp.elixirls.setup{
+    -- Unix
+    cmd = { "/opt/elixir-ls/language_server.sh" };
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+}

@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from typing import List  # noqa: F401
+# from typing import List  # noqa: F401
 
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
@@ -32,41 +32,44 @@ from libqtile.lazy import lazy
 import os
 import subprocess
 
-C0 = "#272822"
-C1 = "#f92672"
-C2 = "#a6e22e"
-C3 = "#f4bf75"
-C4 = "#66d9ef"
-C5 = "#ae81ff"
-C6 = "#a1efe4"
-C7 = "#f8f8f2"
-C8 = "#75715e"
-C9 = "#f92672"
-CA = "#a6e22e"
-CB = "#f4bf75"
-CC = "#66d9ef"
-CD = "#ae81ff"
-CE = "#a1efe4"
-CF = "#f9f8f5"
+C0 = "#4c4c4c"
+C1 = "#ac8a8c"
+C2 = "#8aac8b"
+C3 = "#aca98a"
+C4 = "#8f8aac"
+C5 = "#ac8aac"
+C6 = "#8aacab"
+C7 = "#f0f0f0"
+C8 = "#262626"
+C9 = "#c49ea0"
+CA = "#9ec49f"
+CB = "#c4c19e"
+CC = "#a39ec4"
+CD = "#c49ec4"
+CE = "#9ec3c4"
+CF = "#e7e7e7"
+
+def prefix(text):
+    return widget.TextBox(text=text, foreground=CB)
+
 
 mod = "mod4"
 alt = "mod1"
 terminal = "kitty"
-follow_mouse_focus = False
+wallpaper = os.path.expanduser('~/.local/share/backgrounds/16949.jpg')
 
 
 @hook.subscribe.startup_once
 def autostart():
-    home = os.path.expanduser('~/.config/qtile/autostart.sh')
-    subprocess.call([home])
+    autostart = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.call([autostart])
 
 
 keys = [
     # Switch between windows
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(),
-        desc="Move window focus to other window"),
+
     Key([alt], "Escape", lazy.layout.next(),
         desc="Move window focus to other window"),
 
@@ -93,7 +96,7 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
 
     # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "c", lazy.window.kill(), desc="Kill focused window"),
 
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
@@ -123,7 +126,7 @@ for i in groups:
 
 layouts = [
     layout.MonadTall(
-        border_focus="#bbbbbb",
+        border_focus=C2,
         border_width=4,
         margin=8,
         single_margin=8,
@@ -144,43 +147,56 @@ layouts = [
 widget_defaults = dict(
     font='VictorMono Nerd Font Mono Medium',
     fontsize=22,
-    foreground=C0,
+    foreground=C7,
     padding=8,
 )
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        wallpaper="/usr/share/wallpapers/Volna/contents/images/5120x2880.jpg",
+        wallpaper=wallpaper,
+        wallpaper_mode="fill",
         top=bar.Bar(
             [
-                widget.CurrentLayout(
-                    background=C4,
-                ),
                 widget.GroupBox(
                     highlight_method="line",
-                    this_current_screen_border=C6,
+                    this_current_screen_border=C4,
                     inactive=CF,
                 ),
+                widget.Spacer(background=C4, length=2),
+                widget.CurrentLayout(),
+                widget.Spacer(background=C4, length=2),
                 widget.WindowName(
                     foreground=CF,
                 ),
-                widget.Systray(background=C2, margin=8),
+                widget.Systray(margin=8),
+                widget.Spacer(background=C4, length=2),
+                prefix(""),
                 widget.KeyboardLayout(
-                    fmt=" {}",
                     configured_keyboards=["us", "ca"],
-                    background=C3,
                 ),
+                widget.Spacer(background=C4, length=2),
+                prefix(""),
                 widget.CPU(
-                    background=CA,
-                    format=" {load_percent}%"
+                    format="{freq_current}GHz {load_percent}%"
                 ),
-                widget.Volume(
-                    background=C4,
-                    fmt=" {}",
+                widget.Spacer(background=C4, length=2),
+                prefix(""),
+                widget.Memory(
+                    # format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}"
                 ),
-                widget.Clock(format=' %Y-%m-%d %I:%M %p', background=CD),
-                widget.QuickExit(background=C1),
+                widget.Spacer(background=C4, length=2),
+                prefix(""),
+                widget.Volume(),
+                widget.Spacer(background=C4, length=2),
+                prefix(""),
+                widget.Clock(
+                    format='%Y-%m-%d %I:%M %p',
+                ),
+                widget.Spacer(background=C4, length=2),
+                prefix(""),
+                widget.QuickExit(default_text="exit", countdown_format="{}"),
+                widget.Spacer(length=2),
             ],
             40,
             background=C0,

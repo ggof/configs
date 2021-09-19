@@ -36,3 +36,6 @@ vim.api.nvim_command([[
 autocmd BufNewFile,BufRead *.fs,*.fsx,*.fsi set filetype=fsharp
 ]])
 
+
+vim.api.nvim_command([[autocmd BufNewFile,BufRead *.gleam set filetype=gleam]])
+

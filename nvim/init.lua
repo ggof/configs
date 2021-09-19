@@ -1,11 +1,4 @@
-local fn = vim.fn
-local execute = vim.api.nvim_command
 local cmd = vim.cmd
-
-vim.g.mapleader = ' '
-vim.o.termguicolors = true
-cmd 'colorscheme ayu'
-vim.g.ayucolor = "dark"
 
 require "paq" {
     "savq/paq-nvim";                  -- Let Paq manage itself
@@ -31,10 +24,11 @@ require "paq" {
     "ayu-theme/ayu-vim";
 
     "ionide/ionide-vim";
-    "leafo/moonscript-vim";
 
     "junegunn/fzf";
     "junegunn/fzf.vim";
+
+    "EdenEast/nightfox.nvim";
 }
 
 -- PLUGINS
@@ -43,6 +37,12 @@ require "paq" {
   map_complete = true, -- it will auto insert `(` after select function or method item
   check_ts = true
 }) ]]
+
+
+vim.g.mapleader = ' '
+vim.o.termguicolors = true
+cmd 'colorscheme ayu'
+vim.g.ayucolor = "dark"
 
 require"nvim-autopairs".setup()
 require"neoscroll".setup()
@@ -55,3 +55,4 @@ require('lsp')
 require('keymaps')
 require('eviline')
 require("bufferline").setup{}
+require('syntax')

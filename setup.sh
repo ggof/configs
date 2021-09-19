@@ -3,6 +3,7 @@
 PWD=$(pwd)
 
 ln -s $PWD/awesome $HOME/.config
+ln -s $PWD/qtile $HOME/.config
 ln -s $PWD/kitty $HOME/.config
 ln -s $PWD/nvim $HOME/.config
 ln -s $PWD/qtile $HOME/.config
