@@ -1,58 +1,46 @@
-local cmd = vim.cmd
+require"packer".startup(function(use)
+    use 'wbthomason/packer.nvim'
 
-require "paq" {
-    "savq/paq-nvim";                  -- Let Paq manage itself
-    "kyazdani42/nvim-web-devicons";
+    use 'echasnovski/mini.nvim'
 
-    "neovim/nvim-lspconfig";          -- Mind the semi-colons
+    use "kyazdani42/nvim-web-devicons"
+    use "neovim/nvim-lspconfig"
 
-    "windwp/nvim-autopairs";
-    "hrsh7th/nvim-compe";
-    "karb94/neoscroll.nvim";
-    "b3nj5m1n/kommentary";
+    use "karb94/neoscroll.nvim"
 
-    "nvim-treesitter/nvim-treesitter";
+    use "nvim-treesitter/nvim-treesitter"
 
-    "nvim-lua/popup.nvim";
-    "nvim-lua/completion-nvim";
-    {"lervag/vimtex", opt=true};      -- Use braces when passing options
+    -- COMPLETION
+    --[[ use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/nvim-cmp"
 
-    "norcalli/nvim-colorizer.lua";
-    "glepnir/galaxyline.nvim";
-    -- "alvarosevilla95/luatab.nvim";
-    'akinsho/bufferline.nvim';
-    "ayu-theme/ayu-vim";
+    use 'hrsh7th/cmp-vsnip'
+    use 'hrsh7th/vim-vsnip' ]]
 
-    "ionide/ionide-vim";
-
-    "junegunn/fzf";
-    "junegunn/fzf.vim";
-
-    "EdenEast/nightfox.nvim";
-}
-
--- PLUGINS
---[[ require"nvim-autopairs.completion.compe".setup({
-  map_cr = true, --  map <CR> on insert mode
-  map_complete = true, -- it will auto insert `(` after select function or method item
-  check_ts = true
-}) ]]
-
+    -- FUZZY FINDER
+    use  "junegunn/fzf"
+    use "junegunn/fzf.vim"
+end)
 
 vim.g.mapleader = ' '
 vim.o.termguicolors = true
-cmd 'colorscheme ayu'
-vim.g.ayucolor = "dark"
 
-require"nvim-autopairs".setup()
 require"neoscroll".setup()
-require"colorizer".setup()
+
+require('mini.comment').setup({})
+require('mini.completion').setup({})
+require('mini.tabline').setup({})
+require('mini.surround').setup({})
+require('mini.statusline').setup({})
+require('mini.pairs').setup({})
+require('mini.base16').setup({
+  palette = require"colors.base16-nord"
+})
 
 -- CONFIGS
 require('settings')
-require('config')
+require('treesitter')
 require('lsp')
 require('keymaps')
-require('eviline')
-require("bufferline").setup{}
 require('syntax')

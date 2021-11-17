@@ -1,9 +1,7 @@
 local nvim_lsp = require('lspconfig')
-local completion = require('completion')
+-- local cmp = require('cmp_nvim_lsp')
 
 local on_attach = function(client, bufnr)
-    completion.on_attach(client, bufnr)
-
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -21,14 +19,19 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<leader>sR', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     buf_set_keymap('n', '<leader>sp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
     buf_set_keymap('n', '<leader>sn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+
+    vim.api.nvim_command [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 end
+
+-- local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- To get builtin LSP running, do something like:
 -- NOTE: This replaces the calls where you would have before done `require('nvim_lsp').sumneko_lua.setup()`
-local servers = { 'pyright', 'rls', 'tsserver', 'gopls', 'hls', 'nimls', 'fsautocomplete', 'kotlin_language_server' }
+local servers = { 'pyright', 'rls', 'tsserver', 'gopls', 'hls', 'nimls', 'kotlin_language_server'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
+    -- capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     }
@@ -40,6 +43,7 @@ end
 nvim_lsp.dartls.setup {
     cmd = {'dart', '/opt/dart-sdk/bin/snapshots/analysis_server.dart.snapshot', '--lsp'};
     on_attach = on_attach,
+    -- capabilities = capabilities,
     flags = {
         debounce_text_changes = 150,
     }
@@ -51,28 +55,30 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 nvim_lsp.sumneko_lua.setup {
-  cmd = {"lua-language-server"},
-  on_attach = on_attach,
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-        path = runtime_path,
-      },
-      diagnostics = {
-        globals = {'vim'},
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
+    cmd = {"lua-language-server"},
+    on_attach = on_attach,
+    -- capabilities = capabilities,
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+                path = runtime_path,
+            },
+            diagnostics = {
+                globals = {'vim'},
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+        },
     },
-  },
 }
 
 nvim_lsp.elixirls.setup{
     -- Unix
     cmd = { "/opt/elixir-ls/language_server.sh" };
     on_attach = on_attach,
+    -- capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     }
