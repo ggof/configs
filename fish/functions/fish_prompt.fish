@@ -57,5 +57,5 @@ function fish_prompt --description 'Write out the prompt'
     echo -n $prompt_status
     set_color normal
 
-    printf "$suffix "
+    printf "\n$suffix "
 end

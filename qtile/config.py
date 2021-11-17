@@ -26,37 +26,45 @@
 
 # from typing import List  # noqa: F401
 
+from typing import List
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 import os
 import subprocess
 
-C0 = "#4c4c4c"
-C1 = "#ac8a8c"
-C2 = "#8aac8b"
-C3 = "#aca98a"
-C4 = "#8f8aac"
-C5 = "#ac8aac"
-C6 = "#8aacab"
-C7 = "#f0f0f0"
-C8 = "#262626"
-C9 = "#c49ea0"
-CA = "#9ec49f"
-CB = "#c4c19e"
-CC = "#a39ec4"
-CD = "#c49ec4"
-CE = "#9ec3c4"
-CF = "#e7e7e7"
+C0 = "#2e3440"
+C1 = "#bf616a"
+C2 = "#a3be8c"
+C3 = "#ebcb8b"
+C4 = "#81a1c1"
+C5 = "#b48ead"
+C6 = "#88c0d0"
+C7 = "#e5e9f0"
+
+C8 = "#4c566a"
+C9 = "#bf616a"
+CA = "#a3be8c"
+CB = "#ebcb8b"
+CC = "#81a1c1"
+CD = "#b48ead"
+CE = "#88c0d0"
+CF = "#8fbcbb"
+
+fg = "#e5e9f0"
+bg = "#2e3440"
 
 def prefix(text):
-    return widget.TextBox(text=text, foreground=CB)
+    return widget.TextBox(text=text, foreground=CA)
+
+def spacer():
+    return widget.Spacer(background=CB, length=2)
 
 
 mod = "mod4"
 alt = "mod1"
 terminal = "kitty"
-wallpaper = os.path.expanduser('~/.local/share/backgrounds/16949.jpg')
+wallpaper = os.path.expanduser('~/.local/share/backgrounds/707362.jpg')
 
 
 @hook.subscribe.startup_once
@@ -102,6 +110,7 @@ keys = [
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "p", lazy.spawn("rofi -show drun"), desc="show rofi"),
+    Key([mod, "control"], "p", lazy.spawn("rofi-pass"), desc="open pass manager"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer -i 5")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer -d 5")),
     Key([], "XF86AudioMute", lazy.spawn("pamixer -t"))
@@ -126,7 +135,7 @@ for i in groups:
 
 layouts = [
     layout.MonadTall(
-        border_focus=C2,
+        border_focus=CC,
         border_width=4,
         margin=8,
         single_margin=8,
@@ -145,9 +154,9 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='VictorMono Nerd Font Mono Medium',
+    font='FantasqueSansMono Nerd Font Mono Medium',
     fontsize=22,
-    foreground=C7,
+    foreground=fg,
     padding=8,
 )
 extension_defaults = widget_defaults.copy()
@@ -160,46 +169,44 @@ screens = [
             [
                 widget.GroupBox(
                     highlight_method="line",
-                    this_current_screen_border=C4,
-                    inactive=CF,
+                    this_current_screen_border=CC,
+                    inactive=fg,
                 ),
-                widget.Spacer(background=C4, length=2),
+                spacer(),
                 widget.CurrentLayout(),
-                widget.Spacer(background=C4, length=2),
-                widget.WindowName(
-                    foreground=CF,
-                ),
+                spacer(),
+                widget.WindowName(),
                 widget.Systray(margin=8),
-                widget.Spacer(background=C4, length=2),
+                spacer(),
                 prefix(""),
                 widget.KeyboardLayout(
                     configured_keyboards=["us", "ca"],
                 ),
-                widget.Spacer(background=C4, length=2),
+                spacer(),
                 prefix(""),
                 widget.CPU(
                     format="{freq_current}GHz {load_percent}%"
                 ),
-                widget.Spacer(background=C4, length=2),
+                spacer(),
                 prefix(""),
                 widget.Memory(
                     # format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}"
                 ),
-                widget.Spacer(background=C4, length=2),
+                spacer(),
                 prefix(""),
                 widget.Volume(),
-                widget.Spacer(background=C4, length=2),
+                spacer(),
                 prefix(""),
                 widget.Clock(
                     format='%Y-%m-%d %I:%M %p',
                 ),
-                widget.Spacer(background=C4, length=2),
+                spacer(),
                 prefix(""),
                 widget.QuickExit(default_text="exit", countdown_format="{}"),
                 widget.Spacer(length=2),
             ],
             40,
-            background=C0,
+            background=bg,
         ),
     ),
 ]
@@ -214,7 +221,7 @@ mouse = [
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: List
+dgroups_app_rules: List = []  
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
@@ -225,7 +232,8 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='maketag'),  # gitk
     Match(wm_class='ssh-askpass'),  # ssh-askpass
     Match(title='branchdialog'),  # gitk
-    Match(title='pinentry'),  # GPG key password entry
+    Match(wm_class='pinentry-gtk-2'), # GPG key password entry
+    Match(wm_class='pinentry')
 ])
 
 auto_fullscreen = True
