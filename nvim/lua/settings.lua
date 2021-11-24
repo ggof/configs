@@ -6,14 +6,14 @@ local indent = 2
 cmd 'syntax enable'
 cmd 'filetype plugin indent on'
 
-utils.opt('o', 'completeopt', "menu,menuone,noselect")
+utils.opt('o', 'completeopt', 'menu,menuone,noselect')
 utils.opt('b', 'expandtab', true)
 utils.opt('b', 'shiftwidth', indent)
 utils.opt('b', 'smartindent', true)
 utils.opt('b', 'tabstop', indent)
 utils.opt('o', 'hidden', true)
-utils.opt('o', 'ignorecase', true)
-utils.opt('o', 'scrolloff', 4 )
+utils.opt('o', 'ignorecase', false)
+utils.opt('o', 'scrolloff', 2)
 utils.opt('o', 'shiftround', true)
 utils.opt('o', 'smartcase', true)
 utils.opt('o', 'splitbelow', true)

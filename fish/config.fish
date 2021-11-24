@@ -16,29 +16,18 @@ set -gx PATH $PATH $GOBIN $DARTBIN $FLUTTERBIN $ANDROIDBIN $LOCALBIN $CARGOBIN $
 set -gx EDITOR nvim
 
 ## COLORS ##
-# Dracula Color Palette
-# set -u foreground f0f0f0
-# set -u selection 262626
-# set -u comment c6a679
-# set -u red ac8a8c
-# set -u orange 9ec49f
-# set -u yellow aca98a
-# set -u green 8aac8b
-# set -u magenta ac8aac
-# set -u cyan 8aacab
-# set -u blue c49ea0
 
-# Ayu Dark Color Palette
-set -u foreground d5c4a1
-set -u selection 1d2021
-set -u comment 665c54
-set -u red fb4934
-set -u green b8bb26
-set -u orange fe8019
-set -u yellow fabd2f
-set -u blue 83a598
-set -u magenta d3869b
-set -u cyan 8ec07c
+# Chalk Color Palette
+set -u foreground eeffff
+set -u selection 303030
+set -u comment 4a4a4a
+set -u red ff5370
+set -u green c3e88d
+set -u orange f78c6c
+set -u yellow ffcb6b
+set -u blue 82aaff
+set -u magenta c792ea
+set -u cyan 89ddff
 
 # Syntax Highlighting Colors
 set -g fish_color_normal $foreground
@@ -62,73 +51,4 @@ set -g fish_pager_color_prefix $cyan
 set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
 
-## FISH PROMPT ##
-# name: mars (based on eclm)
-function _git_branch_name
-  echo (command git symbolic-ref HEAD 2> /dev/null | sed -e 's|^refs/heads/||')
-end
-
-function _is_git_dirty
-  echo (command git status -s --ignore-submodules=dirty 2> /dev/null)
-end
-
 alias pyright-langserver pyright
-
-# function fish_prompt
-#   set -l last_status $status
-#   set -l cyan (set_color -o cyan)
-#   set -l yellow (set_color -o yellow)
-#   set -l red (set_color -o red)
-#   set -l blue (set_color -o blue)
-#   set -l green (set_color -o green)
-#   set -l normal (set_color normal)
-# 
-#   if test $last_status = 0
-#       set arrow " $green▶︎︎"
-#   else
-#       set arrow " $red▶︎︎"
-#   end
-#   set -l cwd $cyan(prompt_pwd)
-# 
-#   if [ (_git_branch_name) ]
-#     set git_branch (_git_branch_name)
-# 
-#     if [ (_is_git_dirty) ]
-#       set git_info "$blue ($yellow$git_branch±$blue)"
-#     else
-#       if test (_git_branch_name) = 'master'
-#         set git_info "$blue ($red$git_branch$blue)"
-#       else
-#         set git_info "$blue ($normal$git_branch$blue)"
-#       end
-#     end
-#   end
-# 
-#   echo -n -s $cwd $git_info $normal $arrow $normal ' '
-# end
-# 
-function ex --description "Expand or extract bundled & compressed files"
-  set --local ext (echo $argv[1] | awk -F. '{print $NF}')
-  switch $ext
-    case tar  # non-compressed, just bundled
-      tar -xvf $argv[1]
-    case gz
-      if test (echo $argv[1] | awk -F. '{print $(NF-1)}') = tar  # tar bundle compressed with gzip
-        tar -zxvf $argv[1]
-      else  # single gzip
-        gunzip $argv[1]
-      end
-    case tgz  # same as tar.gz
-      tar -zxvf $argv[1]
-    case bz2  # tar compressed with bzip2
-      tar -jxvf $argv[1]
-    case rar
-      unrar x $argv[1]
-    case zip
-      unzip $argv[1]
-    case '*'
-      echo "unknown extension"
-  end
-end
-
-#pfetch

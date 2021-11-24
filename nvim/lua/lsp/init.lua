@@ -1,5 +1,5 @@
 local nvim_lsp = require('lspconfig')
--- local cmp = require('cmp_nvim_lsp')
+local cmp = require('cmp_nvim_lsp')
 
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -23,7 +23,7 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_command [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 end
 
--- local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- To get builtin LSP running, do something like:
 -- NOTE: This replaces the calls where you would have before done `require('nvim_lsp').sumneko_lua.setup()`
@@ -31,7 +31,7 @@ local servers = { 'pyright', 'rls', 'tsserver', 'gopls', 'hls', 'nimls', 'kotlin
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
-    -- capabilities = capabilities,
+    capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     }
@@ -43,7 +43,7 @@ end
 nvim_lsp.dartls.setup {
     cmd = {'dart', '/opt/dart-sdk/bin/snapshots/analysis_server.dart.snapshot', '--lsp'};
     on_attach = on_attach,
-    -- capabilities = capabilities,
+    capabilities = capabilities,
     flags = {
         debounce_text_changes = 150,
     }
@@ -57,7 +57,7 @@ table.insert(runtime_path, "lua/?/init.lua")
 nvim_lsp.sumneko_lua.setup {
     cmd = {"lua-language-server"},
     on_attach = on_attach,
-    -- capabilities = capabilities,
+    capabilities = capabilities,
     settings = {
         Lua = {
             runtime = {
@@ -78,7 +78,7 @@ nvim_lsp.elixirls.setup{
     -- Unix
     cmd = { "/opt/elixir-ls/language_server.sh" };
     on_attach = on_attach,
-    -- capabilities = capabilities,
+    capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     }
