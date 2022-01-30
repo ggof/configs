@@ -10,6 +10,7 @@ ln -s $PWD/qtile $HOME/.config
 ln -s $PWD/picom.conf $HOME/.config/picom.conf
 ln -s $PWD/polybar $HOME/.config
 ln -s $PWD/fish $HOME/.config
+ln -s $PWD/awesome $HOME/.config
 
 # change shell for fish
 # chsh -s /usr/bin/fish

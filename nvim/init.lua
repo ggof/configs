@@ -22,32 +22,33 @@ require'packer'.startup(function(use)
     use  'junegunn/fzf'
     use 'junegunn/fzf.vim'
 
-    use 'norcalli/nvim-colorizer.lua'
+    use {
+      'ionide/ionide-vim',
+      run = 'make fsautocomplete'
+    }
 end)
 
 vim.g.mapleader = ' '
 vim.o.termguicolors = true
 
 require'neoscroll'.setup()
-require'mini.comment'.setup({})
+
+require('mini.comment').setup({})
 require'mini.tabline'.setup({})
 require'mini.surround'.setup({})
-require'mini.pairs'.setup({})
 require'mini.statusline'.setup({})
+require'mini.pairs'.setup({})
 
-local palette = require'colors.base16-material-darker'
+vim.cmd [[let g:fsharp#lsp_recommended_colorscheme = 0]]
+vim.cmd [[let g:fsharp#lsp_auto_setup = 0]]
 
-require'mini.base16'.setup({
-  palette = palette,
-  use_cterm = true,
-})
-
-require'colorizer'.setup()
+require'ionide'.setup{}
 
 -- CONFIGS
 require'settings'
 require'treesitter'
 require'lsp'
 require'keymaps'
-require'syntax'
-require'complete'
+require'completion'
+local palette = require'colors.base16-gruvbox-dark-hard'
+require'mini.base16'.setup({palette=palette})

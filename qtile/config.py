@@ -54,8 +54,10 @@ CF = "#8fbcbb"
 fg = "#e5e9f0"
 bg = "#2e3440"
 
+
 def prefix(text):
     return widget.TextBox(text=text, foreground=CA)
+
 
 def spacer():
     return widget.Spacer(background=CB, length=2)
@@ -64,7 +66,8 @@ def spacer():
 mod = "mod4"
 alt = "mod1"
 terminal = "kitty"
-wallpaper = os.path.expanduser('~/.local/share/backgrounds/707362.jpg')
+wallpaper = os.path.expanduser(
+    '~/.local/share/backgrounds/firewatch-dark-version-wallpaper.jpg')
 
 
 @hook.subscribe.startup_once
@@ -105,12 +108,15 @@ keys = [
 
     # Toggle between different layouts as defined below
     Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "t", lazy.window.toggle_floating(),
+        desc="Toggle between floating and tiled"),
     Key([mod], "c", lazy.window.kill(), desc="Kill focused window"),
 
-    Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, "shift"], "r", lazy.restart(), desc="Restart Qtile"),
+    Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "p", lazy.spawn("rofi -show drun"), desc="show rofi"),
-    Key([mod, "control"], "p", lazy.spawn("rofi-pass"), desc="open pass manager"),
+    Key([mod, "control"], "p", lazy.spawn(
+        "rofi-pass"), desc="open pass manager"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer -i 5")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer -d 5")),
     Key([], "XF86AudioMute", lazy.spawn("pamixer -t"))
@@ -137,8 +143,8 @@ layouts = [
     layout.MonadTall(
         border_focus=CC,
         border_width=4,
-        margin=8,
-        single_margin=8,
+        margin=4,
+        single_margin=4,
     ),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
@@ -155,7 +161,7 @@ layouts = [
 
 widget_defaults = dict(
     font='FantasqueSansMono Nerd Font Mono Medium',
-    fontsize=22,
+    fontsize=24,
     foreground=fg,
     padding=8,
 )
@@ -205,8 +211,9 @@ screens = [
                 widget.QuickExit(default_text="exit", countdown_format="{}"),
                 widget.Spacer(length=2),
             ],
-            40,
+            48,
             background=bg,
+            margin=4,
         ),
     ),
 ]
@@ -221,7 +228,7 @@ mouse = [
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules: List = []  
+dgroups_app_rules: List = []
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
@@ -232,7 +239,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='maketag'),  # gitk
     Match(wm_class='ssh-askpass'),  # ssh-askpass
     Match(title='branchdialog'),  # gitk
-    Match(wm_class='pinentry-gtk-2'), # GPG key password entry
+    Match(wm_class='pinentry-gtk-2'),  # GPG key password entry
     Match(wm_class='pinentry')
 ])
 
