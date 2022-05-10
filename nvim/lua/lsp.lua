@@ -29,7 +29,7 @@ end
 local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- setup lsps from the `servers` table
-local servers = {'pylsp', 'rust_analyzer', 'tsserver', 'gopls', 'ionide', 'svelte'}
+local servers = {'pylsp', 'rust_analyzer', 'tsserver', 'gopls', 'svelte', 'dartls'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = capabilities,
@@ -37,33 +37,3 @@ for _, lsp in ipairs(servers) do
     flags = {debounce_text_changes = 150}
   }
 end
-
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-nvim_lsp.sumneko_lua.setup {
-    cmd = {"lua-language-server"},
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-        Lua = {
-            runtime = {
-                version = 'LuaJIT',
-                path = runtime_path,
-            },
-            diagnostics = {
-                globals = {'vim'},
-            },
-            workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-            },
-        },
-    },
-}
-
-nvim_lsp.elixirls.setup {
-  cmd = {os.getenv("HOME") .. "/.local/bin/elixir-ls/language_server.sh"},
-  on_attach = on_attach,
-  capabilities = capabilities
-}

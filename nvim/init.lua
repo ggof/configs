@@ -18,14 +18,11 @@ require'packer'.startup(function(use)
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/vim-vsnip'
 
-    -- FUZZY FINDER
-    use  'junegunn/fzf'
-    use 'junegunn/fzf.vim'
-
     use {
-      'ionide/ionide-vim',
-      run = 'make fsautocomplete'
+      'nvim-telescope/telescope.nvim',
+      requires = { {'nvim-lua/plenary.nvim'} }
     }
+
 end)
 
 vim.g.mapleader = ' '
@@ -33,22 +30,18 @@ vim.o.termguicolors = true
 
 require'neoscroll'.setup()
 
-require('mini.comment').setup({})
+require'mini.comment'.setup({})
 require'mini.tabline'.setup({})
 require'mini.surround'.setup({})
 require'mini.statusline'.setup({})
 require'mini.pairs'.setup({})
-
-vim.cmd [[let g:fsharp#lsp_recommended_colorscheme = 0]]
-vim.cmd [[let g:fsharp#lsp_auto_setup = 0]]
-
-require'ionide'.setup{}
+require'mini.completion'.setup({})
 
 -- CONFIGS
 require'settings'
 require'treesitter'
 require'lsp'
 require'keymaps'
-require'completion'
+-- require'completion'
 local palette = require'colors.base16-gruvbox-dark-hard'
 require'mini.base16'.setup({palette=palette})

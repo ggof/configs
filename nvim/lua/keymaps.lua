@@ -5,8 +5,8 @@ local function set_keymap(...) vim.api.nvim_set_keymap(...) end
 
 -- Mappings
 local opts = { noremap=true, silent=true }
-set_keymap('n', '<C-p>', ':Files<CR>', opts)
-set_keymap('n', '<C-b>', ':Buffers<CR>', opts)
+set_keymap('n', '<C-p>', '<cmd>Telescope find_files<CR>', opts)
+set_keymap('n', '<C-b>', '<cmd>Telescope buffers<CR>', opts)
 set_keymap('n', '<TAB>', ':bnext<CR>', opts)
 set_keymap('n', '<S-TAB>', ':bprev<CR>', opts)
 set_keymap('n', '<leader>q', ':bdelete<CR>', opts)
