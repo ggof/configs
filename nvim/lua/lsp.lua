@@ -1,5 +1,4 @@
 local nvim_lsp = require('lspconfig')
-local cmp = require('cmp_nvim_lsp')
 
 -- on_attach is a function run every time an LSP server attaches to the current buffer.
 -- It should setup special keybindings, etc.
@@ -7,7 +6,7 @@ local on_attach = function(_, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Keybindings for LSP
     local opts = { noremap=true, silent=true }
@@ -26,13 +25,10 @@ local on_attach = function(_, bufnr)
     vim.api.nvim_command [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 end
 
-local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 -- setup lsps from the `servers` table
-local servers = {'pylsp', 'rust_analyzer', 'tsserver', 'gopls', 'svelte', 'dartls'}
+local servers = {'pylsp', 'rust_analyzer', 'tsserver', 'gopls', 'svelte', 'dartls', 'fsautocomplete'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-    capabilities = capabilities,
     on_attach = on_attach,
     flags = {debounce_text_changes = 150}
   }

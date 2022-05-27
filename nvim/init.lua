@@ -10,20 +10,19 @@ require'packer'.startup(function(use)
 
     use 'nvim-treesitter/nvim-treesitter'
 
-    -- COMPLETION
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/nvim-cmp'
-
-    use 'hrsh7th/cmp-vsnip'
-    use 'hrsh7th/vim-vsnip'
+    use 'lfe-support/vim-lfe'
 
     use {
       'nvim-telescope/telescope.nvim',
       requires = { {'nvim-lua/plenary.nvim'} }
     }
 
+    use 'ionide/Ionide-vim'
+
+
 end)
+
+vim.cmd([[let g:fsharp#lsp_auto_setup = 0]])
 
 vim.g.mapleader = ' '
 vim.o.termguicolors = true
@@ -42,6 +41,5 @@ require'settings'
 require'treesitter'
 require'lsp'
 require'keymaps'
--- require'completion'
-local palette = require'colors.base16-gruvbox-dark-hard'
-require'mini.base16'.setup({palette=palette})
+local palette = require'colors.base16-chalk'
+require'mini.base16'.setup({palette=palette, use_cterm=true})
