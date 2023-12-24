@@ -1,6 +1,6 @@
 local nvim_lsp = require('lspconfig')
 local trouble = require('trouble')
--- local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- on_attach is a function run every time an LSP server attaches to the current buffer.
 -- It should setup special keybindings, etc.
@@ -27,7 +27,7 @@ local function setup(server)
   server.setup {
     on_attach = on_attach,
     flags = { debounce_text_changes = 150 },
-    -- capabilities = capabilities,
+    capabilities = capabilities,
   }
 end
 
