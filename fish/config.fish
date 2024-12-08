@@ -15,30 +15,22 @@ set -gx JAVA_HOME /lib/jvm/default
 set -gx JAVA_BIN $JAVA_HOME/bin
 set -gx TURSO_HOME $HOME/.turso
 set -gx DOTNETBIN $HOME/.dotnet/tools
+set -gx CARGOBIN $HOME/.cargo/bin
+set -gx DART_SDK_PATH $HOME/.local/share/dart-sdk
+set -gx ONYX_PATH $HOME/.local/share/onyx
+set -gx PNPM_HOME $HOME/.local/share/pnpm
+set -gx BUN_INSTALL $HOME/.bun
 
-# OCaml
-set -gx OPAM_SWITCH_PREFIX $HOME/.opam/default
-set -gx CAML_LD_LIBRARY_PATH $OPAM_SWITCH_PREFIX/lib/stublibs /usr/lib/ocaml/stublibs /usr/lib/ocaml
-set -gx OCAML_TOPLEVEL_PATH $OPAM_SWITCH_PREFIX/lib/toplevel
-
-set -gx OPAM_BIN $OPAM_SWITCH_PREFIX/bin
-
-# builtin -n | /bin/sh -c 'grep -q \'^argparse$\'' 1>/dev/null 2>/dev/null; and set -gx MANPATH ':/home/gabrielg/.opam/default/man';
-
-set -gx PATH $PATH $OPAM_BIN $GOBIN $DARTBIN $FLUTTERBIN $ANDROIDBIN $LOCALBIN $CARGOBIN $POETRYBIN $NIMBIN $ROSBIN $JAVA_BIN $TURSO_HOME $DOTNETBIN
+fish_add_path $CARGOBIN $DART_SDK_PATH/bin $ONYX_PATH/bin $HOME/.dune/bin $GOBIN $DARTBIN $FLUTTERBIN $ANDROIDBIN $LOCALBIN $CARGOBIN $POETRYBIN $NIMBIN $ROSBIN $JAVA_BIN $TURSO_HOME $DOTNETBIN $PNPM_HOME $BUN_INSTALL/bin
 
 set -gx EDITOR nvim
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
+set -gx SSL_CERT_DIR /etc/ssl/certs
 
 #pfetch
 alias tf terraform
 
-# pnpm
-set -gx PNPM_HOME "$HOME/.local/share/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
-# pnpm end
-
-
 # bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
+
+# dune
+source $HOME/.dune/env/env.fish

@@ -1,3 +1,3 @@
 function hx
-  helix $ARGV
+  helix $argv
 end
