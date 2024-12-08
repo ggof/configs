@@ -1,12 +1,8 @@
-local function set_keymap(...) vim.api.nvim_set_keymap(...) end
--- local function set_option(...) vim.api.nvim_set_option(...) end
-
--- set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+local function set_keymap(...) vim.keymap.set(...) end
 
 -- Mappings
-local opts = { noremap=true, silent=true }
-set_keymap('n', '<C-p>', '<cmd>Telescope find_files<CR>', opts)
-set_keymap('n', '<C-b>', '<cmd>Telescope buffers<CR>', opts)
+local opts = { noremap = true, silent = true }
+set_keymap('n', '<C-p>', MiniPick.builtin.files, opts)
 set_keymap('n', '<TAB>', ':bnext<CR>', opts)
 set_keymap('n', '<S-TAB>', ':bprev<CR>', opts)
 set_keymap('n', '<leader>q', ':bdelete<CR>', opts)

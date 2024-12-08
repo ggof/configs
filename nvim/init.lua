@@ -1,99 +1,57 @@
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  })
+local path_package = vim.fn.stdpath('data') .. '/site/'
+local mini_path = path_package .. 'pack/deps/start/mini.nvim'
+if not vim.loop.fs_stat(mini_path) then
+  vim.cmd('echo "Installing `mini.nvim`" | redraw')
+  local clone_cmd = {
+    'git', 'clone', '--filter=blob:none',
+    'https://github.com/echasnovski/mini.nvim', mini_path
+  }
+  vim.fn.system(clone_cmd)
+  vim.cmd('packadd mini.nvim | helptags ALL')
 end
-vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
-  'ionide/Ionide-vim',
-  'echasnovski/mini.nvim',
-  {
-    'folke/noice.nvim',
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-    }
-  },
-  'folke/trouble.nvim',
-  'nvim-tree/nvim-web-devicons',
-  'neovim/nvim-lspconfig',
-  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-  {
-    'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' }
-  },
-  'dcampos/nvim-snippy',
-  'dcampos/cmp-snippy',
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/nvim-cmp',
-  'declancm/cinnamon.nvim',
-  'rebelot/kanagawa.nvim',
-  'AlexvZyl/nordic.nvim',
-  {
-    'olivercederborg/poimandres.nvim',
-    config = function()
-      require('poimandres').setup()
-    end
-  },
-}, {
-  version = nil,
-})
+require 'mini.notify'.setup({ lsp_progress = { enable = false } })
 
-vim.cmd([[let g:fsharp#lsp_auto_setup = 0]])
-
-vim.g.mapleader = ' '
-vim.opt.termguicolors = true
+vim.notify = MiniNotify.make_notify()
 
 require 'mini.comment'.setup({})
+require 'mini.pairs'.setup({})
 require 'mini.tabline'.setup({})
 require 'mini.statusline'.setup({})
-require 'mini.pairs'.setup({})
+require 'mini.fuzzy'.setup({})
+require 'mini.pick'.setup({})
 
-require 'cinnamon'.setup()
+require 'mini.deps'.setup({ path = { package = path_package } })
 
--- CONFIGS
+MiniDeps.add('nvim-tree/nvim-web-devicons')
+MiniDeps.add('neovim/nvim-lspconfig')
+MiniDeps.add('honza/vim-snippets')
+MiniDeps.add('dcampos/nvim-snippy')
+MiniDeps.add('dcampos/cmp-snippy')
+MiniDeps.add('mattn/emmet-vim')
+MiniDeps.add('dcampos/cmp-emmet-vim')
+MiniDeps.add('hrsh7th/cmp-nvim-lsp')
+MiniDeps.add('hrsh7th/nvim-cmp')
+MiniDeps.add('ionide/ionide-vim')
+MiniDeps.add('karb94/neoscroll.nvim')
+MiniDeps.add('olivercederborg/poimandres.nvim')
+
+MiniDeps.add({
+  source = 'nvim-treesitter/nvim-treesitter',
+  checkout = 'master',
+  monitor = 'master',
+  hooks = { post_checkout = function() vim.cmd.TSUpdate() end },
+})
+
+MiniDeps.add('danielo515/nvim-treesitter-reason')
+
+require 'cmds'
 require 'settings'
-require 'treesitter'
-require 'lsp'
 require 'keymaps'
 require 'completion'
+require 'lsp'
+require 'treesitter'
 
-require 'telescope'.setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<esc>'] = require 'telescope.actions'.close
-      },
-    },
-  }
-}
+require 'neoscroll'.setup()
 
-require 'trouble'.setup()
-require 'noice'.setup({
-  routes = {
-    {
-      -- this is needed to filter out excessive lsp progress messages from Ionide(F#)
-      -- we just check if the message contains .fs extension and skip it
-      filter = {
-        event = "lsp",
-        kind = "progress",
-        find = ".*.fs.*",
-      },
-      opts = { skip = true },
-    },
-  },
-})
-
-
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.templ' },
-  command = 'setfiletype templ',
-})
-
-vim.cmd.colorscheme 'nordic'
+vim.cmd.Palette('tokyo-night-terminal-dark')
