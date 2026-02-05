@@ -5,6 +5,7 @@ local opts = { noremap = true, silent = true }
 
 -- QOL
 vim.keymap.set("n", "<C-p>", FzfLua.files, opts)
+vim.keymap.set("n", "<C-o>", MiniFiles.open, opts)
 vim.keymap.set("n", "<leader>/", FzfLua.live_grep, opts)
 vim.keymap.set("n", "<TAB>", ":bnext<CR>", opts)
 vim.keymap.set("n", "<S-TAB>", ":bprev<CR>", opts)
