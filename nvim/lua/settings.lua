@@ -1,30 +1,101 @@
-local utils = require('utils')
-
 local indent = 2
 
 vim.cmd.syntax('enable')
 vim.cmd.filetype('plugin indent on')
 
-vim.g.fsharp = { lsp_auto_setup = 0 }
 vim.g.mapleader = ' '
-vim.opt.termguicolors = true
+vim.g.maplocalleader = ' '
 
-utils.opt('o', 'completeopt', 'menu,menuone,noselect')
-utils.opt('b', 'expandtab', true)
-utils.opt('b', 'shiftwidth', indent)
-utils.opt('b', 'smartindent', true)
-utils.opt('b', 'tabstop', indent)
-utils.opt('o', 'hidden', true)
-utils.opt('o', 'ignorecase', false)
-utils.opt('o', 'scrolloff', 2)
-utils.opt('o', 'shiftround', true)
-utils.opt('o', 'smartcase', true)
-utils.opt('o', 'splitbelow', true)
-utils.opt('o', 'splitright', true)
-utils.opt('o', 'wildmode', 'list:longest')
-utils.opt('w', 'number', true)
-utils.opt('w', 'relativenumber', true)
-utils.opt('o', 'ruler', true)
-utils.opt('o', 'cursorline', true)
-utils.opt('o', 'mouse', 'a')
-utils.opt('o', 'showtabline', 2)
+vim.opt.shiftround = true
+vim.opt.wildmode = 'list:longest'
+vim.opt.ruler = true
+vim.opt.showtabline = 2
+vim.opt.winborder = 'rounded'
+--
+-- Basic settings
+vim.opt.number = true                              -- Line numbers
+vim.opt.relativenumber = true                      -- Relative line numbers
+vim.opt.cursorline = true                          -- Highlight current line
+vim.opt.wrap = false                               -- Don't wrap lines
+vim.opt.scrolloff = 8                             -- Keep 10 lines above/below cursor 
+vim.opt.sidescrolloff = 8                          -- Keep 8 columns left/right of cursor
+
+-- Indentation
+vim.opt.tabstop = indent                           -- Tab width
+vim.opt.shiftwidth = indent                        -- Indent width
+vim.opt.softtabstop = indent                       -- Soft tab stop
+vim.opt.expandtab = true                           -- Use spaces instead of tabs
+vim.opt.smartindent = true                         -- Smart auto-indenting
+vim.opt.autoindent = true                          -- Copy indent from current line
+
+-- Search settings
+vim.opt.ignorecase = true                          -- Case insensitive search
+vim.opt.smartcase = true                           -- Case sensitive if uppercase in search
+vim.opt.hlsearch = false                           -- Don't highlight search results 
+vim.opt.incsearch = true                           -- Show matches as you type
+
+-- Visual settings
+vim.opt.termguicolors = true                       -- Enable 24-bit colors
+vim.opt.signcolumn = "yes"                         -- Always show sign column
+vim.opt.colorcolumn = "120"                        -- Show column at 100 characters
+vim.opt.showmatch = true                           -- Highlight matching brackets
+vim.opt.matchtime = 2                              -- How long to show matching bracket
+vim.opt.cmdheight = 1                              -- Command line height
+vim.o.completeopt = 'menu,menuone,noselect,fuzzy,nosort,popup' -- completion options
+vim.opt.showmode = false                           -- Don't show mode in command line 
+vim.opt.pumheight = 10                             -- Popup menu height 
+vim.opt.pumblend = 10                              -- Popup menu transparency 
+vim.opt.winblend = 0                               -- Floating window transparency 
+vim.opt.conceallevel = 0                           -- Don't hide markup 
+vim.opt.concealcursor = ""                         -- Don't hide cursor line markup 
+vim.opt.lazyredraw = true                          -- Don't redraw during macros
+vim.opt.synmaxcol = 300                            -- Syntax highlighting limit 
+
+-- File handling
+vim.opt.backup = false                             -- Don't create backup files
+vim.opt.writebackup = false                        -- Don't create backup before writing
+vim.opt.swapfile = false                           -- Don't create swap files
+vim.opt.undofile = true                            -- Persistent undo
+vim.opt.undodir = vim.fn.expand("~/.vim/undodir")  -- Undo directory
+vim.opt.updatetime = 300                           -- Faster completion
+vim.opt.timeoutlen = 500                           -- Key timeout duration
+vim.opt.ttimeoutlen = 0                            -- Key code timeout
+vim.opt.autoread = true                            -- Auto reload files changed outside vim
+vim.opt.autowrite = false                          -- Don't auto save
+
+-- Behavior settings
+vim.opt.hidden = true                              -- Allow hidden buffers
+vim.opt.errorbells = false                         -- No error bells
+vim.opt.backspace = "indent,eol,start"             -- Better backspace behavior
+vim.opt.autochdir = false                          -- Don't auto change directory
+vim.opt.selection = "exclusive"                    -- Selection behavior
+vim.opt.clipboard:append("unnamedplus")            -- Use system clipboard
+vim.opt.modifiable = true                          -- Allow buffer modifications
+vim.opt.encoding = "UTF-8"                         -- Set encoding
+
+-- Folding settings
+vim.opt.foldmethod = "expr"                        -- Use expression for folding
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"    -- Use treesitter for folding
+vim.opt.foldlevel = 99                             -- Start with all folds open
+
+-- Split behavior
+vim.opt.splitbelow = true                          -- Horizontal splits go below
+vim.opt.splitright = true                          -- Vertical splits go right
+
+FzfLua.register_ui_select()
+
+vim.diagnostic.config({
+  virtual_lines = {
+    current_line = true
+  }
+})
+
+-- Create directories when saving files
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    local dir = vim.fn.expand('<afile>:p:h')
+    if vim.fn.isdirectory(dir) == 0 then
+      vim.fn.mkdir(dir, 'p')
+    end
+  end,
+})

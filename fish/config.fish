@@ -1,4 +1,3 @@
-set -gx GOPATH $HOME/go
 set -gx FZF_DEFAULT_COMMAND fd --type f
 set -gx NIMBIN $HOME/.nimble/bin 
 set -gx POETRYBIN $HOME/.poetry/bin 
